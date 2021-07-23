@@ -1,15 +1,15 @@
 ## users テーブル
 
-| Column             | Type   | Options     |
-| ------------------ | ------ | ----------- |
-| nickname           | string | null: false |
-| email              | string | null: false |
-| encrypted_password | string | null: false |
-| first_name         | string | null: false |
-| last_name          | string | null: false |
-| first_name_kana    | string | null: false |
-| last_name_kana     | string | null: false |
-| birthday           | date   | null: false |
+| Column             | Type   | Options                   |
+| ------------------ | ------ | ------------------------- |
+| nickname           | string | null: false               |
+| email              | string | null: false, unique: true |
+| encrypted_password | string | null: false               |
+| first_name         | string | null: false               |
+| last_name          | string | null: false               |
+| first_name_kana    | string | null: false               |
+| last_name_kana     | string | null: false               |
+| birthday           | date   | null: false               |
 
 
 ### Association
@@ -21,7 +21,7 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user             | references | null: false                    |
+| user             | references | null: false, unique: true      |
 | product_name     | string     | null: false                    |
 | description      | text       | null: false                    |
 | category_id      | integer    | null: false                    |
@@ -46,9 +46,9 @@
 
 - belongs_to :user
 - belongs_to :item
-- has_one :address
+- has_one :residence
 
-## addresses テーブル
+## residences テーブル
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
