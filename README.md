@@ -21,7 +21,7 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user             | references | null: false, unique: true      |
+| user             | references | null: false                    |
 | product_name     | string     | null: false                    |
 | description      | text       | null: false                    |
 | category_id      | integer    | null: false                    |
