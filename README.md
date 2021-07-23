@@ -21,7 +21,7 @@
 
 | Column           | Type       | Options                        |
 | ---------------- | ---------- | ------------------------------ |
-| user             | references | null: false                    |
+| user             | references | null: false, foreign_key: true |
 | product_name     | string     | null: false                    |
 | description      | text       | null: false                    |
 | category_id      | integer    | null: false                    |
@@ -41,8 +41,8 @@
 
 | Column     | Type        | Options                        |
 | ---------- | ----------- | ------------------------------ |
-| user       | references  | null: false, foreign_key       |
-| item       | references  | null: false, foreign_key       |
+| user       | references  | null: false, foreign_key: true |
+| item       | references  | null: false, foreign_key: true |
 
 - belongs_to :user
 - belongs_to :item
@@ -52,7 +52,7 @@
 
 | Column        | Type       | Options                        |
 | ------------- | ---------- | ------------------------------ |
-| purchase      | references | null: false, foreign_key       |
+| purchase      | references | null: false, foreign_key: true |
 | address       | string     | null: false                    |
 | phone_number  | string     | null: false                    |
 | postal_code   | string     | null: false                    |
