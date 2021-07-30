@@ -109,6 +109,17 @@ RSpec.describe User, type: :model do
       @user.valid?
       expect(@user.errors.full_messages).to include("Last name kana is invalid")
     end
+    it 'emailは@が含まれていないと登録ができない' do
+      @user.email = '@'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Email is invalid")
+    end
+    it '同じemailは登録できない（一意性）' do
+      @user.save
+      another_user = FactoryBot.build(:user, email: @user.email)
+      another_user.valid?
+      expect(another_user.errors.full_messages).to include("Email has already been taken")
+    end
   end
 
   end
