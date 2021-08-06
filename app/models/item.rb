@@ -7,7 +7,7 @@ class Item < ApplicationRecord
   belongs_to :status
   belongs_to :user
 
-  has_one_attached :purchase
+  # has_one_attached :purchase
   has_one_attached :image
 
   with_options presence: true do
@@ -24,9 +24,11 @@ class Item < ApplicationRecord
 
    validates :price, inclusion: { in: 300..9999999 }
 
-  validates :category_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :status_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :burden_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :delivery_id, numericality: { other_than: 1 , message: "can't be blank"}
-  validates :days_delivery_id, numericality: { other_than: 1 , message: "can't be blank"}
+  with_options numericality: { other_than: 1 , message: "can't be blank"} do
+  validates :category_id
+  validates :status_id
+  validates :burden_id
+  validates :delivery_id
+  validates :days_delivery_id
+  end
 end
