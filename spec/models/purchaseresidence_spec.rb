@@ -1,7 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe PurchaseResidence, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
   before do
     user = FactoryBot.create(:user)
     item = FactoryBot.create(:item)
@@ -48,6 +47,11 @@ RSpec.describe PurchaseResidence, type: :model do
       @purchase_residence.valid?
       expect(@purchase_residence.errors.full_messages).to include("Building name can't be blank")
     end
+    it '建物名の記入がなくても登録できること' do
+      @purchase_residence.building_name = ''
+      @purchase_residence.valid?
+      expect(@purchase_residence.errors.full_messages).to include("Building name can't be blank")
+    end
     it '電話番号が必須であること。' do
       @purchase_residence.phone_number = ''
       @purchase_residence.valid?
@@ -77,6 +81,16 @@ RSpec.describe PurchaseResidence, type: :model do
       @purchase_residence.phone_number = '１２３４５６７８９０'
       @purchase_residence.valid?
       expect(@purchase_residence.errors.full_messages).to include("Phone number is invalid", "Phone number is invalid")
+    end
+    it 'user_idが空では購入できないこと' do
+      @purchase_residence.user_id = ''
+      @purchase_residence.valid?
+      expect(@purchase_residence.errors.full_messages).to include("User can't be blank")
+    end
+    it 'item_idが空では購入できないこと' do
+      @purchase_residence.item_id = ''
+      @purchase_residence.valid?
+      expect(@purchase_residence.errors.full_messages).to include("Item can't be blank")
     end
   end
   end

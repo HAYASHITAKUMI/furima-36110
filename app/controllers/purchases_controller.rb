@@ -1,15 +1,15 @@
 class PurchasesController < ApplicationController
   before_action :authenticate_user!
+  before_action :set_item
+  before_action :move_to_index
   def index
     @purchase_residence = PurchaseResidence.new
-    @item = Item.find(params[:item_id])
-    if current_user == @item.user || @item.purchase != nil      #売り切れ商品なら（@itemに紐づくpurchaseテーブルの情報が存在すれば）
+    if current_user == @item.user || @item.purchase != nil
       redirect_to root_path
       end
   end
   def create
       @purchase_residence = PurchaseResidence.new(purchase_params)
-      @item = Item.find(params[:item_id])
       if @purchase_residence.valid?
         pay_item
         @purchase_residence.save
@@ -25,12 +25,26 @@ class PurchasesController < ApplicationController
   end
 
   def pay_item
-    Payjp.api_key = "sk_test_c265199bbafbc7b8d41e4d73"
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
     Payjp::Charge.create(
     amount: @item.price,
     card: purchase_params[:token],
     currency: 'jpy'
     )
+  end
+
+  def set_item
+    @item = Item.find(params[:item_id])
+  end
+
+  def move_to_index
+    if @purchase_residence.valid?
+      pay_item
+      @purchase_residence.save
+      redirect_to root_path
+    else
+      render action: :index
+    end
   end
 end
 

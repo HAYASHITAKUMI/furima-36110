@@ -7,7 +7,7 @@ class CreateResidences < ActiveRecord::Migration[6.0]
       t.integer :delivery_id,               null: false
       t.string :municipality,              null: false
       t.references :purchase,               null: false, foreign_key: true
-      t.string :building_name,             null: false
+      t.string :building_name
       t.timestamps
     end
   end
