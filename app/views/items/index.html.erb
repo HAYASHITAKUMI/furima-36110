@@ -135,11 +135,11 @@
           <%= image_tag "item-sample.png", class: "item-img" %>
 
 
-          <%# <% if （ここに条件文） %>
+          <% if item.purchase.present? %>
           <div class='sold-out'>
             <span>Sold Out!!</span>
           </div>
-          <%# <% end %> 
+          <% end %>
 
 
         </div>
