@@ -14,6 +14,11 @@ RSpec.describe PurchaseResidence, type: :model do
         @purchase_residence
         expect(@purchase_residence).to be_valid
       end
+      it '建物名は任意であること。' do
+        @purchase_residence.building_name = ''
+        @purchase_residence.valid?
+        expect(@purchase_residence).to be_valid
+      end
     end
 
   context '商品購入ができない場合' do
@@ -41,16 +46,6 @@ RSpec.describe PurchaseResidence, type: :model do
       @purchase_residence.address = ''
       @purchase_residence.valid?
       expect(@purchase_residence.errors.full_messages).to include("Address can't be blank")
-    end
-    it '建物名は任意であること。' do
-      @purchase_residence.building_name = ''
-      @purchase_residence.valid?
-      expect(@purchase_residence.errors.full_messages).to include("Building name can't be blank")
-    end
-    it '建物名の記入がなくても登録できること' do
-      @purchase_residence.building_name = ''
-      @purchase_residence.valid?
-      expect(@purchase_residence.errors.full_messages).to include("Building name can't be blank")
     end
     it '電話番号が必須であること。' do
       @purchase_residence.phone_number = ''

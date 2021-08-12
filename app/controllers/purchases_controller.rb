@@ -4,10 +4,8 @@ class PurchasesController < ApplicationController
   before_action :move_to_index
   def index
     @purchase_residence = PurchaseResidence.new
-    if current_user == @item.user || @item.purchase != nil
-      redirect_to root_path
-      end
   end
+
   def create
       @purchase_residence = PurchaseResidence.new(purchase_params)
       if @purchase_residence.valid?
@@ -38,13 +36,8 @@ class PurchasesController < ApplicationController
   end
 
   def move_to_index
-    if @purchase_residence.valid?
-      pay_item
-      @purchase_residence.save
+    if current_user == @item.user || @item.purchase != nil
       redirect_to root_path
-    else
-      render action: :index
     end
   end
 end
-

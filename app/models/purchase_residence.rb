@@ -8,7 +8,6 @@ class PurchaseResidence
     validates :postal_code
     validates :delivery_id
     validates :municipality
-    validates :building_name
     validates :token
     validates :user_id
     validates :item_id
