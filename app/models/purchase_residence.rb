@@ -17,10 +17,6 @@ class PurchaseResidence
     validates :postal_code
    end
 
-   with_options format: { with: /\A[0-9]+\z/ } do
-    validates :phone_number
-   end
-
    with_options format: { with: /\A\d{10,11}\z/ } do
     validates :phone_number
    end
